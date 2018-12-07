@@ -6,6 +6,7 @@ public class Main {
         list.add(3);
         list.add(2);
         list.add(1);
+// 123
 //        if (list.contains(10)) {
 //            System.out.println("contains");
 //        }
