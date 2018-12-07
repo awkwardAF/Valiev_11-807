@@ -3,9 +3,21 @@ import java.util.Iterator;
 public class MyArrayList<T> implements Iterable<T> {
     private T[] elements;
     private int count = 0;
+    private int capacity = 10;
+    private static final double EXTENSION_COEF = 1.5;
+
+    public void grow() {
+        int newCapacity = (int) (count * EXTENSION_COEF);
+        T[] newElements = (T[]) new Object[newCapacity];
+        for (int i = 0; i < count; i++) {
+            newElements[i] = elements[i];
+        }
+        capacity = newCapacity;
+        elements = newElements;
+    }
 
     public MyArrayList() {
-        this.elements = (T[]) new Object[10];
+        this.elements = (T[]) new Object[capacity];
     }
 
     public void add(T e) {
@@ -45,7 +57,7 @@ public class MyArrayList<T> implements Iterable<T> {
     }
 
     //возвращает все элементы из списка в виде массива
-    T[] toArray() {
+    public T[] toArray() {
         T[] arr = (T[]) new Object[count];
         for (int i = 0; i < count; i++) {
             arr[i] = elements[i];
@@ -55,14 +67,25 @@ public class MyArrayList<T> implements Iterable<T> {
 
     //добавление всех элементов из списка list в данный список(в конец)
     void addAll(MyArrayList<T> list) {
-        for (int i = 0; i < list.size(); i++) {
-            add(list[i]);
+        T[] newList = list.toArray();
+        for (int i = 0; i < newList.length; i++) {
+            if (capacity==count) {
+                grow();
+            }
+            elements[count+i]=newList[i];
         }
     }
 
     //добавление всех элементов из списка list в данный список
     //начиная с позиции index
     void addAll(MyArrayList<T> list, int index) {
+        T[] newList = list.toArray();
+        for (int i = 0; i < newList.length; i++) {
+            if (capacity==count){
+                grow();
+            }
+            elements[index+i] = newList[i];
+        }
     }
 
     public Iterator<T> iterator() {
