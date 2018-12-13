@@ -35,13 +35,17 @@ public class Matrix {
         }
     }
 
-    public static void shift() {
+    public static void shift() throws IOException {
         done = false;
         Scanner sc = new Scanner(System.in);
         String answer = sc.nextLine();
         if (answer.equals("exit")) {
             mn.play = false;
             return;
+        }
+        else if (answer.equals("type")) {
+            type();
+            done = true;
         }
         else if (answer.equals("undo")){
             save(x, y);
@@ -89,7 +93,25 @@ public class Matrix {
         vivod();
     }
 
-
+    public static void type() throws IOException {
+        boolean hasZero = false;
+        Scanner sc = new Scanner(System.in);
+        for (int i = 0; i < pt.length; i++) {
+            for (int j = 0; j < pt.length; j++) {
+                pt[i][j] = sc.nextInt();
+                if (pt[i][j] == 0) {
+                    hasZero = true;
+                }
+            }
+        }
+        if (hasZero) {
+            writeFile();
+            System.out.println("New matrix was successfully saved");
+        }
+        else {
+            System.out.println("New matrix doesn't contain Zero, matrix wasn't saved");
+        }
+    }
 
 
     public static void vivod() {
@@ -116,7 +138,6 @@ public class Matrix {
             file.write("\r\n");
         }
         file.close();
-        System.out.println("Stopped playing, matrix has been saved");
     }
 
 }

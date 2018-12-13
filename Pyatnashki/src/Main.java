@@ -16,5 +16,6 @@ public class Main {
         // Matrix.check();
         Matrix.vivod();
         Matrix.writeFile();
+        System.out.println("Stopped playing, matrix has been saved");
         }
     }
