@@ -12,7 +12,7 @@ public class IntListTestMain {
         list2.add(10);
         list2.add(10);
         list2.add(10);
-        list.addAll(list2);
+        list.addAllFrom(list2, 1);
         list.out();
     }
 }
