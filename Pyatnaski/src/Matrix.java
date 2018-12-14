@@ -15,11 +15,14 @@ public class Matrix {
     public static int[][] pt;
     private static int x;
     private static int y;
+    public static int n;
+    public static int m;
     static File file = new File("pyat.txt");
-    public static int [][] zero = new int [10][0];
     public static int count = 0;
 
-    public static void readFile(int n, int m) throws FileNotFoundException, IOException {
+    public static void readFile(int o, int p) throws FileNotFoundException, IOException {
+        n = o;
+        m = p;
         pt = new int[n][m];
         Scanner scannerfile = new Scanner(file);
         for (int i = 0; i < n; i++) {
@@ -94,23 +97,45 @@ public class Matrix {
     }
 
     public static void type() throws IOException {
-        boolean hasZero = false;
+        int [][] newMatrix = new int [n][m];
         Scanner sc = new Scanner(System.in);
         for (int i = 0; i < pt.length; i++) {
             for (int j = 0; j < pt.length; j++) {
-                pt[i][j] = sc.nextInt();
-                if (pt[i][j] == 0) {
-                    hasZero = true;
-                }
+                newMatrix[i][j] = sc.nextInt();
             }
         }
-        if (hasZero) {
+        if (perfect()) {
+            System.arraycopy(newMatrix, 0 , pt, 0 , n*m);
             writeFile();
             System.out.println("New matrix was successfully saved");
         }
         else {
-            System.out.println("New matrix doesn't contain Zero, matrix wasn't saved");
+            System.out.println("New matrix is built not following the rules, matrix wasn't saved");
         }
+    }
+
+    private static boolean perfect() {
+        boolean re = false;
+        int count = 0;
+        int sum = 0;
+        for (int i = 0; i < n*m; i++) {
+            for (int j = 0; j < n; j++) {
+                for (int k = 0; k < m; k++) {
+                    if (pt[j][k] == count++) {
+                        re = true;
+                        break;
+                    }
+                }
+            }
+            if (re) {
+                sum++;
+            }
+            re = false;
+        }
+        if (sum == n*m) {
+            return true;
+        }
+        else return false;
     }
 
 
