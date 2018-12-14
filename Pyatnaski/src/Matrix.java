@@ -56,7 +56,12 @@ public class Matrix {
             System.out.println("Previous move undone");
         }
         else {
-            cell = parseInt(answer);
+                try {
+                    cell = parseInt(answer);
+                } catch (NumberFormatException nfe) {
+                    System.err.println("No such command");
+                    done = true;
+                }
         }
         if (cell / 10 + 1 == x && cell % 10 == y) {
             pt[x][y] = pt[cell / 10][cell % 10];
