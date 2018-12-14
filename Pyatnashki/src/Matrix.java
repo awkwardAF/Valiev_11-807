@@ -18,7 +18,7 @@ public class Matrix {
     static File file = new File("pyat.txt");
     public static int [][] zero = new int [10][0];
     public static int count = 0;
-    
+
     public static void readFile(int n, int m) throws FileNotFoundException, IOException {
         pt = new int[n][m];
         Scanner scannerfile = new Scanner(file);
@@ -122,7 +122,23 @@ public class Matrix {
             System.out.println();
         }
     }
-    
+
+    public static void check() {
+        boolean completed = true;
+        int count = 0;
+        for (int i = 0; i < pt.length; i++) {
+            for (int j = 0; j < pt.length; j++) {
+                if (pt[i][j] != count++) {
+                    completed = false;
+                }
+            }
+        }
+        if (completed) {
+            System.out.println("Поздравляю, вы прошли игру");
+            mn.play = false;
+        }
+    }
+
     public static void save (int x,int y) {
         pt[x][y] = pt[savex][savey];
         pt[savex][savey] = 0;

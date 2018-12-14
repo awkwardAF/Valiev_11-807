@@ -12,10 +12,9 @@ public class Main {
         Matrix.vivod();
         while (play) {
             Matrix.shift();
+            Matrix.check();
         }
-        // Matrix.check();
         Matrix.vivod();
         Matrix.writeFile();
-        System.out.println("Stopped playing, matrix has been saved");
         }
     }
