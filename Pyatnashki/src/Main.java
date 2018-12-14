@@ -8,6 +8,7 @@ public class Main {
     private static int y;
 
     public static void main(String[] args) throws IOException {
+        System.out.println("\"type\", \"exit\", \"undo\", or enter coordinates");
         Matrix.readFile(4, 4);
         Matrix.vivod();
         while (play) {

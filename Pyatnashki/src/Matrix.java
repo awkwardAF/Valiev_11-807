@@ -84,8 +84,8 @@ public class Matrix {
             pt[cell / 10][cell % 10] = 0;
             x = cell / 10;
             y = cell % 10;
-            savex = cell / 10 - 1;
-            savey = cell % 10;
+            savex = cell / 10;
+            savey = cell % 10 - 1;
             done = true;
         } if (!done) {
             System.out.println("Wrong coordinate");
