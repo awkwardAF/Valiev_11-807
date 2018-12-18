@@ -7,11 +7,12 @@ public class Main {
     private static int y;
 
     public static void main(String[] args) throws IOException {
-        System.out.println("\"type\" - enter new game by yourself,");
+        System.out.println("\"new\" - enter new game by yourself,");
         System.out.println("\"exit\" - save and exit the game");
         System.out.println("\"undo\" - moves \"0\" to previous position");
+        System.out.println("\"random\" - random matrix");
         System.out.println("or enter coordinates to move Zero");
-        Matrix.readFile(4, 4);
+        Matrix.readFile(4);
         Matrix.vivod();
         while (play) {
             Matrix.shift();
