@@ -1,5 +1,4 @@
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,7 +19,7 @@ public class Matrix {
     static File file = new File("pyat.txt");
     public static int count = 0;
 
-    public static void readFile(int o) throws FileNotFoundException, IOException {
+    public static void readFile(int o) throws IOException {
         n = o;
         pt = new int[n][n];
         Scanner scannerfile = new Scanner(file);
@@ -46,7 +45,6 @@ public class Matrix {
                 System.out.println("Сколько строк (столбцов) в новой матрице?");
                 int q = sc.nextInt();
                 readFile(q);
-                randomMatrix(q);
                 done = true;
                 break;
             case "exit":
@@ -54,7 +52,7 @@ public class Matrix {
                 writeFile();
                 System.out.println("Thanks for playing");
                 return;
-            case "new":
+            case "type":
                 type();
                 done = true;
                 break;
@@ -190,13 +188,12 @@ public class Matrix {
         }
         System.out.println("Random matrix generated");
         writeFile();
-        vivod();
     }
 
 
     public static void vivod() {
-        for (int i = 0; i < pt.length; i++) {
-            for (int j = 0; j < pt.length; j++) {
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
                 System.out.format("%5d", pt[i][j]);
             }
             System.out.println();
@@ -234,6 +231,28 @@ public class Matrix {
             file.write("\r\n");
         }
         file.close();
+    }
+
+    public static void readFile() throws IOException {
+        int elements = 0;
+        int nothing;
+        Scanner scannerfile = new Scanner(file);
+        while (scannerfile.hasNextInt()) {
+            elements++;
+            nothing = scannerfile.nextInt();
+        }
+        n = (int) Math.sqrt(elements);
+        for (int i = 0; i < Math.sqrt(elements); i++) {
+            for (int j = 0; j < Math.sqrt(elements); j++) {
+                if (scannerfile.hasNextInt()) {
+                    pt[i][j] = scannerfile.nextInt();
+                    if (pt[i][j] == 0) {
+                        x = i;
+                        y = j;
+                    }
+                }
+            }
+        }
     }
 
 }

@@ -21,20 +21,23 @@ public class Main {
                 go = true;
             } else if (e.equals("continue")) {
                 System.out.println("Вы продолжили игру");
+                Matrix.readFile();
                 go = true;
             } else {
-                System.err.println("No such command");
+                System.err.println("Такой команды нет, введите снова");
             }
         }
-        System.out.println("\"type\" - enter new level by yourself,");
-        System.out.println("\"exit\" - save and exit the game");
+        System.out.println("Enter coordinates to move Zero");
+        System.out.println("\"type\" - enter new level by yourself");
         System.out.println("\"undo\" - moves \"0\" to previous position");
         System.out.println("\"random\" - random matrix");
-        System.out.println("or enter coordinates to move Zero");
+        System.out.println("\"save\" - saves matrix");
+        System.out.println("\"exit\" - save and exit the game");
         Matrix.readFile(Matrix.n);
         Matrix.vivod();
         while (play) {
             Matrix.shift();
+            Matrix.vivod();
             Matrix.check();
         }
     }
