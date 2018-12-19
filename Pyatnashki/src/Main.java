@@ -18,7 +18,5 @@ public class Main {
             Matrix.shift();
             Matrix.check();
         }
-        Matrix.vivod();
-        Matrix.writeFile();
         }
     }

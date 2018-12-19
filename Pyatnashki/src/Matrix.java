@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import static java.lang.Integer.parseInt;
@@ -47,6 +48,8 @@ public class Matrix {
                 break;
             case "exit":
                 mn.play = false;
+                writeFile();
+                System.out.println("Thanks for playing");
                 return;
             case "new":
                 type();
@@ -125,6 +128,10 @@ public class Matrix {
             for (int i = 0; i < newMatrix.length; i++) {
                 for (int j = 0; j < newMatrix.length; j++) {
                     pt[i][j] = newMatrix[i][j];
+                    if (pt[i][j] == 0) {
+                        x = i;
+                        y = j;
+                    }
                 }
             }
             writeFile();
@@ -158,29 +165,27 @@ public class Matrix {
     }
 
     public static void randomMatrix() throws IOException {
-        boolean correct = false;
-        int[][] matrix = new int[n][n];
-        while (!correct) {
-            for (int i = 0; i < matrix.length; i++) {
-                for (int j = 0; j < matrix.length; j++) {
-                    matrix[i][j] = ((int) ((Math.random() * 15)));
-                    if (matrix[i][j] == matrix.length) {
-                        matrix[i][j] = ((int) ((Math.random() * 15)));
-                    }
-                    // System.out.println(matrix[i][j]);
-                }
-            }
-            if (perfect(matrix)) {
-                for (int i = 0; i < matrix.length; i++) {
-                    for (int j = 0; j < matrix.length; j++) {
-                        pt[i][j] = matrix[i][j];
+        ArrayList<Integer> list = new ArrayList<>();
+        boolean added = false;
+        for (int i = 0; i < pt.length; i++) {
+            for (int j = 0; j < pt.length; j++) {
+                while (!added) {
+                    int a = ((int) ((Math.random() * 16)));
+                    if (!list.contains(a)) {
+                        pt[i][j] = a;
+                        if (pt[i][j] == 0) {
+                            x = i;
+                            y = j;
+                        }
+                        list.add(a);
+                        added = true;
                     }
                 }
-                writeFile();
-                System.out.println("Random matrix generated");
-                correct = true;
+                added = false;
             }
         }
+        System.out.println("Random matrix generated");
+        writeFile();
     }
 
 
@@ -215,7 +220,7 @@ public class Matrix {
     }
 
 
-    public static void writeFile() throws IOException {
+    private static void writeFile() throws IOException {
         FileWriter file = new FileWriter(new File("pyat.txt"));
         for (int i = 0; i < pt.length; i++) {
             for (int j = 0; j < pt.length; j++) {
