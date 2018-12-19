@@ -43,7 +43,10 @@ public class Matrix {
         String answer = sc.nextLine();
         switch (answer) {
             case "random":
-                randomMatrix();
+                System.out.println("Сколько строк (столбцов) в новой матрице?");
+                int q = sc.nextInt();
+                readFile(q);
+                randomMatrix(q);
                 done = true;
                 break;
             case "exit":
@@ -57,6 +60,7 @@ public class Matrix {
                 break;
             case "save":
                 saveMatrix();
+                done = true;
                 break;
             case "undo":
                 save(x, y);
@@ -108,7 +112,7 @@ public class Matrix {
         if (!done) {
             System.err.println("Wrong coordinate");
         }
-        vivod();
+
     }
 
     private static void saveMatrix() throws IOException {
@@ -119,14 +123,14 @@ public class Matrix {
     public static void type() throws IOException {
         int[][] newMatrix = new int[n][n];
         Scanner sc = new Scanner(System.in);
-        for (int i = 0; i < pt.length; i++) {
-            for (int j = 0; j < pt.length; j++) {
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
                 newMatrix[i][j] = sc.nextInt();
             }
         }
         if (perfect(newMatrix)) {
-            for (int i = 0; i < newMatrix.length; i++) {
-                for (int j = 0; j < newMatrix.length; j++) {
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
                     pt[i][j] = newMatrix[i][j];
                     if (pt[i][j] == 0) {
                         x = i;
@@ -164,13 +168,13 @@ public class Matrix {
         } else return false;
     }
 
-    public static void randomMatrix() throws IOException {
+    public static void randomMatrix(int q) throws IOException {
         ArrayList<Integer> list = new ArrayList<>();
         boolean added = false;
-        for (int i = 0; i < pt.length; i++) {
-            for (int j = 0; j < pt.length; j++) {
+        for (int i = 0; i < q; i++) {
+            for (int j = 0; j < q; j++) {
                 while (!added) {
-                    int a = ((int) ((Math.random() * 16)));
+                    int a = ((int) ((Math.random() * q*q)));
                     if (!list.contains(a)) {
                         pt[i][j] = a;
                         if (pt[i][j] == 0) {
@@ -186,6 +190,7 @@ public class Matrix {
         }
         System.out.println("Random matrix generated");
         writeFile();
+        vivod();
     }
 
 
