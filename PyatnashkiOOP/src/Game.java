@@ -30,23 +30,53 @@ public class Game {
                 case "undo":
                     matrix.undo();
                     performed = true;
+                    matrix.setSaved(false);
                     break;
                 case "type":
                     matrix.type(matrix);
                     performed = true;
+                    matrix.setSaved(false);
                     break;
                 case "random":
                     matrix.random();
                     performed = true;
+                    matrix.setSaved(false);
                     break;
                 case "save":
                     matrix.writeFile();
                     performed = true;
+                    matrix.setSaved(true);
                     break;
                 case "exit":
                     performed = true;
-                    System.out.println("Спасибо за игру");
-                    play = false;
+                    if (matrix.getSaved()) {
+                        System.out.println("Спасибо за игру");
+                        play = false;
+                    }
+                    else {
+                        System.err.println("Вы действительно хотите выйти без сохранения?");
+                        System.out.println("1 - сохранить и выйти.");
+                        System.out.println("0 - выйти без сохранения");
+                        boolean quit = false;
+                        while (!quit) {
+                            switch (sc.nextInt()) {
+                                case 1:
+                                    matrix.writeFile();
+                                    System.out.println("Спасибо за уделенное время");
+                                    play = false;
+                                    quit = true;
+                                    break;
+                                case 2:
+                                    play = false;
+                                    quit = true;
+                                    System.out.println("Вы вышли без сохранения");
+                                    break;
+                                default:
+                                    System.err.println("Введите 1 или 0");
+                                    break;
+                            }
+                        }
+                    }
                     break;
                 default:
                     if (isParsable(answer)) {
@@ -59,6 +89,7 @@ public class Game {
                         else if (!isTwo(answer)) System.err.println("Число должно состоять из двух цифр и быть положительным ( Например, 21: 2 - координата по x, 1 - по y )");
                         else System.err.println("Координаты введены в неверном формате");
                     }
+                    matrix.setSaved(false);
                     break;
             }
         }

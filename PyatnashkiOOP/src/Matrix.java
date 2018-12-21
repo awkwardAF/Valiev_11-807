@@ -7,15 +7,33 @@ import java.util.Scanner;
 
 public class Matrix {
 
-
+    private boolean saved = false;
     private int saveX;
     private int saveY;
     private int size;
     private int zeroX;
     private int zeroY;
     private int[][] pt;
-    private File file = new File("pyat.txt");
+    private String username;
+    private File file;
 
+
+    boolean getSaved () {
+        return saved;
+    }
+
+    void setSaved (boolean q) {
+        saved = q;
+    }
+
+    void setUsername (String username) {
+        this.username = username;
+        file = new File(username + ".txt");
+    }
+
+    String getUsername () {
+        return username;
+    }
 
     int getSaveX() {
         return saveX;
@@ -61,7 +79,7 @@ public class Matrix {
         if (Math.sqrt(elements) % 1 == 0) {
             setSize((int) Math.sqrt(elements));
         } else {
-            System.err.println("Разберитесь с матрицей в текстовом файле, она не квадратная");
+            System.err.println(getUsername() + ", для того, чтобы продолжить игру, разберитесь с матрицей в текстовом файле, она не квадратная");
             System.exit(2);
         }
         Scanner reader = new Scanner(file);
@@ -77,7 +95,7 @@ public class Matrix {
             }
         }
         if (!perfect(pt)) {
-            System.err.println("Количество элементотв в матрице верно, однако она составлена не верно, ну-ка разберитесь");
+            System.err.println(getUsername() + ", количество элементотв в матрице верно, однако она составлена не верно, ну-ка разберитесь");
             System.exit(3);
         }
         out();
@@ -130,6 +148,7 @@ public class Matrix {
         Scanner sc = new Scanner(System.in);
         System.out.println("Какие размеры новой матрицы?");
         int n = sc.nextInt();
+        System.out.println("Вводите элементы");
         int[][] newMatrix = new int[n][n];
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
@@ -148,15 +167,15 @@ public class Matrix {
                 }
             }
             System.out.println("Новая матрица была успешно сохранена, для сохранения в текстовый документ напишите \"save\"");
+            out();
         } else {
             System.err.println("С новой матрицой что-то явно не так");
         }
     }
 
     private static boolean perfect(int[][] newOne) {
-        boolean re = false;
+        boolean re;
         int count = 0;
-        int sum = 0;
         for (int i = 0; i < newOne.length * newOne.length; i++) {
             re = false;
             for (int j = 0; j < newOne.length; j++) {
@@ -176,7 +195,7 @@ public class Matrix {
 
 
     public void writeFile() throws IOException {
-        FileWriter file = new FileWriter(new File("pyat.txt"));
+        FileWriter file = new FileWriter(new File(getUsername() + ".txt"));
         for (int i = 0; i < getSize(); i++) {
             for (int j = 0; j < getSize(); j++) {
                 file.write((pt[i][j]) + " ");
@@ -219,6 +238,28 @@ public class Matrix {
             saveX = newX;
             saveY = newY - 1;
         }
+        if (check()) {
+            System.exit(1);
+        }
         out();
     }
+
+    public boolean check() {
+        boolean completed = true;
+        int count = 0;
+        for (int i = 0; i < getSize(); i++) {
+            for (int j = 0; j < getSize(); j++) {
+                if (pt[i][j] != count++) {
+                    completed = false;
+                }
+            }
+        }
+        if (completed) {
+            System.out.println("\u001B[32m" + "Поздравляю, вы прошли игру" + "\u001B[0m");
+        }
+        out();
+        return completed;
+    }
+
+
 }
