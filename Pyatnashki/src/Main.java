@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
 
@@ -7,7 +8,7 @@ public class Main {
     private static int x;
     private static int y;
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         Scanner sc = new Scanner(System.in);
         boolean go = false;
         while (!go) {
@@ -28,10 +29,15 @@ public class Main {
             }
         }
         System.out.println("Enter coordinates to move Zero");
+        TimeUnit.SECONDS.sleep(2);
         System.out.println("\"type\" - enter new level by yourself");
+        TimeUnit.SECONDS.sleep(2);
         System.out.println("\"undo\" - moves \"0\" to previous position");
+        TimeUnit.SECONDS.sleep(2);
         System.out.println("\"random\" - random matrix");
+        TimeUnit.SECONDS.sleep(2);
         System.out.println("\"save\" - saves matrix");
+        TimeUnit.SECONDS.sleep(2);
         System.out.println("\"exit\" - save and exit the game");
         Matrix.readFile(Matrix.n);
         Matrix.vivod();

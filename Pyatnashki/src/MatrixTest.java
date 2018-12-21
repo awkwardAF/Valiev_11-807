@@ -20,14 +20,14 @@ public class MatrixTest {
     // проверяет, что кол-во сгенерированных случайным образом чисел соответсувет кол-ву ячеек матрицы
     @Test
     public void testAmountOfRandomedElements() {
-        int n = 0;
+        int n = Matrix.n;
         int count = 0;
         int[][] matrix = new int[n][n];
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix.length; j++) {
-                matrix[i][j] = ((int) ((Math.random() * 15)));
+                matrix[i][j] = ((int) ((Math.random() * 16)));
                 if (matrix[i][j] == matrix.length) {
-                    matrix[i][j] = ((int) ((Math.random() * 15)));
+                    matrix[i][j] = ((int) ((Math.random() * 16)));
                     count++;
                 }
             }
@@ -78,7 +78,7 @@ public class MatrixTest {
         assertTrue(new File("pyat.txt").exists());
     }
 
-    // проверяет, что в матрице есть пустая клетка
+    // проверяет, что в  игре есть пустая клетка ( в матрице - "0" )
     @Test
     public void testContainsZero () throws FileNotFoundException {
         boolean has = false;
@@ -93,7 +93,36 @@ public class MatrixTest {
     }
 
     @Test
-    public void test () {
+    public void testCompleted () {
+        boolean completed = true;
+        int count = 0;
+        int [][] checkPT = new int [Matrix.n][Matrix.n];
+        Scanner scannerfile = null;
+        try {
+            scannerfile = new Scanner(new File("pyat.txt"));
+        } catch (FileNotFoundException e) {
+            System.out.println("No such file");
+        }
+        for (int i = 0; i < Matrix.n; i++) {
+            for (int j = 0; j < Matrix.n; j++) {
+                if (scannerfile.hasNextInt()) {
+                    checkPT[i][j] = scannerfile.nextInt();
+                }
+            }
+        }
+        for (int i = 0; i < checkPT.length; i++) {
+            for (int j = 0; j < checkPT.length; j++) {
+                if (checkPT[i][j] != count++) {
+                    completed = false;
+                }
+            }
+        }
+        if (completed) {
+            assertTrue(true);
+        }
+        else if (!completed) {
+            assertTrue(false);
+        }
 
     }
 
