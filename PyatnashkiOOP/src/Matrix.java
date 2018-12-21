@@ -61,7 +61,7 @@ public class Matrix {
         if (Math.sqrt(elements) % 1 == 0) {
             setSize((int) Math.sqrt(elements));
         } else {
-            System.err.println("Разберитесь с матрицей в текстовом файле, с ней определенно что-то не так");
+            System.err.println("Разберитесь с матрицей в текстовом файле, она не квадратная");
             System.exit(2);
         }
         Scanner reader = new Scanner(file);
@@ -221,5 +221,4 @@ public class Matrix {
         }
         out();
     }
-
 }
