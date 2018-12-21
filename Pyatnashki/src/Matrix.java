@@ -226,7 +226,7 @@ public class Matrix {
         FileWriter file = new FileWriter(new File("pyat.txt"));
         for (int i = 0; i < pt.length; i++) {
             for (int j = 0; j < pt.length; j++) {
-                file.write(String.valueOf(pt[i][j]) + " ");
+                file.write((pt[i][j]) + " ");
             }
             file.write("\r\n");
         }
