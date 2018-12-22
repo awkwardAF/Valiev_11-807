@@ -258,7 +258,7 @@ public class Matrix {
         if (completed) {
             System.out.println("\u001B[32m" + "Поздравляю, вы прошли игру" + "\u001B[0m");
         }
-        out();
+
         return completed;
     }
 

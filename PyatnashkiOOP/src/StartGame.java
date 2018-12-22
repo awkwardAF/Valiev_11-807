@@ -24,6 +24,7 @@ public class StartGame {
 
                 } else {
                     System.err.println("Такой команды не существует");
+                    System.out.println("Введите свое имя снова");
                 }
             } else {
                 logged = true;
