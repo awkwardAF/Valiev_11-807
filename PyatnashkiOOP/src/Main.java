@@ -8,7 +8,14 @@ public class Main {
         Matrix matrix = sg.begin(choice);
         Game game = new Game(matrix);
         while (game.play) {
-            game.action();
+            if (game.loggedIn) {
+                game.action();
+            }
+            else {
+                choice = sg.login();
+                game.loggedIn = true;
+                matrix = sg.begin(choice);
+            }
         }
     }
 }

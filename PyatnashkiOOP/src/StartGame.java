@@ -21,6 +21,7 @@ public class StartGame {
                 answer = sc.nextLine();
                 if (answer.equals("new") | answer.equals("continue")) {
                     logged = true;
+
                 } else {
                     System.err.println("Такой команды не существует");
                 }
@@ -33,6 +34,8 @@ public class StartGame {
         }
         return answer;
     }
+
+
 
     public Matrix begin(String answer) throws IOException {
         Scanner sc = new Scanner(System.in);

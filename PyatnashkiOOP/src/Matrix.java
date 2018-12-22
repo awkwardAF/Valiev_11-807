@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class Matrix {
 
+    private boolean loggedIn = true;
     private boolean saved = false;
     private int saveX;
     private int saveY;

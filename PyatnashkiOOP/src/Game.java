@@ -7,17 +7,20 @@ import java.util.Scanner;
 public class Game {
 
     private Matrix matrix;
+    boolean loggedIn = false;
     boolean play = true;
 
     public Game(Matrix matrix) {
+        loggedIn = true;
         this.matrix = matrix;
         System.out.println("Возможности:");
-        System.out.println("Переместить \"0\" в ближайшую клетку по диагонали или вертикали");
+        System.out.println("Переместить \"0\" в ближайшую клетку по горизотали или вертикали");
         System.out.println("Для этого введите двузначное число, где первая цифра координата x, а вторая - y");
         System.out.println("\"undo\" - возвращаят \"0\" на предыдущую позицию");
         System.out.println("\"type\" - позволяет ввести матрицу собственноручно");
         System.out.println("\"random\" - генерирует матрицу с указанной размерностью");
         System.out.println("\"save\" - сохраняет вашу матрицу");
+        System.out.println("\"logout\" - выйти из профиля");
         System.out.println("\"exit\" - выйти из игры");
     }
 
@@ -47,36 +50,13 @@ public class Game {
                     performed = true;
                     matrix.setSaved(true);
                     break;
+                case "logout":
+                    loggedIn = false;
+                    performed = true;
+                    break;
                 case "exit":
                     performed = true;
-                    if (matrix.getSaved()) {
-                        System.out.println("Спасибо за игру");
-                        play = false;
-                    }
-                    else {
-                        System.err.println("Вы действительно хотите выйти без сохранения?");
-                        System.out.println("1 - сохранить и выйти.");
-                        System.out.println("0 - выйти без сохранения");
-                        boolean quit = false;
-                        while (!quit) {
-                            switch (sc.nextInt()) {
-                                case 1:
-                                    matrix.writeFile();
-                                    System.out.println("Спасибо за уделенное время");
-                                    play = false;
-                                    quit = true;
-                                    break;
-                                case 2:
-                                    play = false;
-                                    quit = true;
-                                    System.out.println("Вы вышли без сохранения");
-                                    break;
-                                default:
-                                    System.err.println("Введите 1 или 0");
-                                    break;
-                            }
-                        }
-                    }
+                    exit();
                     break;
                 default:
                     if (isParsable(answer)) {
@@ -107,6 +87,38 @@ public class Game {
     private boolean isTwo(String s) {
         char[] ch = s.toCharArray();
         return ch.length == 2;
+    }
+
+    private void exit() throws IOException {
+        Scanner sc = new Scanner(System.in);
+        if (matrix.getSaved()) {
+            System.out.println("Спасибо за игру");
+            play = false;
+        }
+        else {
+            System.err.println("Вы действительно хотите выйти без сохранения?");
+            System.out.println("1 - сохранить и выйти.");
+            System.out.println("0 - выйти без сохранения");
+            boolean quit = false;
+            while (!quit) {
+                switch (sc.nextInt()) {
+                    case 1:
+                        matrix.writeFile();
+                        System.out.println("Спасибо за уделенное время");
+                        play = false;
+                        quit = true;
+                        break;
+                    case 2:
+                        play = false;
+                        quit = true;
+                        System.out.println("Вы вышли без сохранения");
+                        break;
+                    default:
+                        System.err.println("Введите 1 или 0");
+                        break;
+                }
+            }
+        }
     }
 
 }
