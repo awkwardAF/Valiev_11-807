@@ -1,10 +1,12 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
 public class StartGame {
 
+    File pass;
     private Matrix matrix = new Matrix();
 
     public String login() throws IOException {
@@ -13,29 +15,36 @@ public class StartGame {
         String answer = null;
         boolean logged = false;
         while (!logged) {
-            String s = sc.nextLine();
-            matrix.setUsername(s);
-            if (new File(s + ".txt").exists()) {
-                System.out.println("Какие люди! Вы снова тут!");
-                System.out.println("Если вы хотите начать новую игру, то введите \"new\", чтобы продолжить игру - \"continue\"");
-                answer = sc.nextLine();
-                if (answer.equals("new") | answer.equals("continue")) {
-                    logged = true;
+            String name = sc.nextLine();
+            matrix.setUsername(name);
+            if (new File(name + ".txt").exists()) {
+                System.out.println("Введите свой пароль для входа в аккаунт");
+                String t = sc.nextLine();
+                if (passCheck(t, name)) {
+                    System.out.println("Какие люди! Вы снова тут!");
+                    System.out.println("Если вы хотите начать новую игру, то введите \"new\", чтобы продолжить игру - \"continue\"");
+                    answer = sc.nextLine();
+                    if (answer.equals("new") | answer.equals("continue")) {
+                        logged = true;
 
-                } else {
-                    System.err.println("Такой команды не существует");
-                    System.out.println("Введите свое имя снова");
+                    } else {
+                        System.err.println("Такой команды не существует");
+                        System.out.println("Введите свое имя снова");
+                    }
                 }
             } else {
-                logged = true;
+                pass = new File(name + "pass.txt");
+                System.out.println("Введите свой новый пароль для входа в аккаунт");
+                String t = sc.nextLine();
+                createPass(t, name);
                 System.out.println("Добро пожаловать в игру, мы всегда рады новым знакомствам!");
                 System.out.println("Чтобы начать новую игру, введите \"new\"");
                 answer = sc.nextLine();
+                logged = true;
             }
         }
         return answer;
     }
-
 
 
     public Matrix begin(String answer) throws IOException {
@@ -64,6 +73,17 @@ public class StartGame {
             }
         }
         return matrix;
+    }
+
+    private boolean passCheck(String password, String name) throws FileNotFoundException {
+        Scanner scan = new Scanner(new File(name + "pass.txt"));
+        return password.equals(scan.nextLine());
+    }
+
+    private void createPass(String pass, String name) throws IOException {
+        FileWriter write = new FileWriter(name + "pass.txt");
+        write.write(pass);
+        write.close();
     }
 
 }

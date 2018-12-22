@@ -167,7 +167,7 @@ public class Matrix {
                     }
                 }
             }
-            System.out.println("Новая матрица была успешно сохранена, для сохранения в текстовый документ напишите \"save\"");
+            System.out.println("Матрица была успешно изменена, для сохранения в текстовый документ напишите \"save\"");
             out();
         } else {
             System.err.println("С новой матрицой что-то явно не так");
@@ -256,6 +256,7 @@ public class Matrix {
             }
         }
         if (completed) {
+            out();
             System.out.println("\u001B[32m" + "Поздравляю, вы прошли игру" + "\u001B[0m");
         }
 
