@@ -9,5 +9,12 @@ public class Main {
         System.out.println(intStack.pop());
         System.out.println(intStack.pop());
 
+        Queue<Integer> intQueue = new Queue<Integer>();
+        intQueue.enqueue(7);
+        intQueue.enqueue(8);
+        System.out.println(intQueue.dequeue());
+        intQueue.enqueue(9);
+        System.out.println(intQueue.dequeue());
+        System.out.println(intQueue.dequeue());
     }
 }
