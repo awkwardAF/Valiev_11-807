@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) throws FileNotFoundException {
-        File file = new File("C:\\Everything\\Valiev_11-807\\SemesterRept\\src\\numbers\\numbers\\set9179.txt");
+        File file = new File("src\\numbers\\numbers\\set9179.txt");
         Scanner sc = new Scanner(file);
         LinkedList<Integer> list = new LinkedList<>(); // LinkedList to sort
         LinkedRadix lr = new LinkedRadix(list);

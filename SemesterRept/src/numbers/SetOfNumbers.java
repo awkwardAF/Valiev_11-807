@@ -20,7 +20,7 @@ public class SetOfNumbers {
     void newSet () throws IOException {
         Random amount = new Random();
         int n = amount.nextInt(9900) + 100;
-        file = new File("C:\\Everything\\Valiev_11-807\\SemesterRept\\src\\numbers\\numbers\\set" + n + ".txt");
+        file = new File("src\\numbers\\numbers\\set" + n + ".txt");
         // n - количество элементов в документе
         count++;
         fw = new FileWriter(file, true);
