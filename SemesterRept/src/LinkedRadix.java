@@ -13,10 +13,6 @@ public class LinkedRadix {
     private static int iterations = 0;
     private LinkedList<Integer> outList = new LinkedList<Integer>();
 
-    public LinkedRadix(LinkedList<Integer> list) {
-        this.list = list;
-    }
-
     public int getMax() {
         int max = 0;
         for (Object a:
@@ -71,6 +67,7 @@ public class LinkedRadix {
     // Radix Sort
     LinkedList<Integer> radixSort(LinkedList<Integer> list)
     {
+        this.list = list;
         // Find the maximum number to know number of digits
         int m = getMax();
 

@@ -1,34 +1,31 @@
 import numbers.SetOfNumbers;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.Random;
-import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) throws FileNotFoundException {
-//        File file = new File("src\\numbers\\numbers\\set5.txt");
-//        Scanner sc = new Scanner(file);
+    public static void main(String[] args) {
         SetOfNumbers son = new SetOfNumbers();
-        LinkedList<Integer> list = new LinkedList<>(); // LinkedList to sort
-        LinkedRadix lr = new LinkedRadix(list);
-//        while (sc.hasNextInt()) {
-//            list.add(sc.nextInt());
-//        }
+        LinkedRadix lr = new LinkedRadix();
         Radix radix = new Radix();
         Random rd = new Random();
-        for (int i = 0; i < 50; i++) {
-            int[] arr = son.newSetArray();
+        /* Для зависимости времени от входных данных
+        for (int i = 1; i < 101; i++) {
+            int[] arr = son.newSetArray(i*100); //LinkedList/Array to sort
             long start = System.nanoTime();
             radix.radixSort(arr, arr.length); // calling method that sorts the list/array
             long finish = System.nanoTime();
-            System.out.println(list); // printing out the result
             long ml = (finish - start);
-            System.out.print(ml + " ");
-            System.out.print(arr.length + "");
+            System.out.print(ml  + "\n");
+            System.out.print(arr.length + "\n");
+        }
+        */
+        for (int i = 1; i < 101; i++) {
+            int [] arr = son.newSetArray(i*100); // LinkedList/Array to sort
+            radix.radixSort(arr, arr.length);
+            System.out.print(radix.getIterations() + "\n");
+//            System.out.println(arr.length + "\n");
         }
     }
 }

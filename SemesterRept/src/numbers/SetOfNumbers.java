@@ -9,6 +9,7 @@ package numbers;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.Random;
 
 public class SetOfNumbers {
@@ -32,14 +33,22 @@ public class SetOfNumbers {
         fw.close();
     }
 
-    public int [] newSetArray () {
+    public int [] newSetArray(int i) {
         Random rd = new Random();
-        int n = rd.nextInt(9900) + 100;
-        int [] arr = new int [n];
-        for (int i = 0; i < n; i++) {
-            arr[i] = rd.nextInt(10000);
+        int[] arr = new int[i];
+        for (int j = 0; j < arr.length; j++) {
+            arr[j] = rd.nextInt(10000);
         }
         return arr;
+    }
+
+    public LinkedList<Integer> newSetList(int i) {
+        LinkedList list = new LinkedList();
+        Random rd = new Random();
+        for (int j = 0; j < i; j++) {
+            list.add(rd.nextInt(10000));
+        }
+        return list;
     }
 
 
