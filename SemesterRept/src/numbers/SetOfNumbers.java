@@ -17,7 +17,7 @@ public class SetOfNumbers {
     private int count = 1;
     private FileWriter fw;
 
-    void newSet () throws IOException {
+    public void newSet () throws IOException {
         Random amount = new Random();
         int n = amount.nextInt(9900) + 100;
         file = new File("src\\numbers\\numbers\\set" + n + ".txt");
@@ -31,5 +31,16 @@ public class SetOfNumbers {
         fw.flush();
         fw.close();
     }
+
+    public int [] newSetArray () {
+        Random rd = new Random();
+        int n = rd.nextInt(9900) + 100;
+        int [] arr = new int [n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = rd.nextInt(10000);
+        }
+        return arr;
+    }
+
 
 }

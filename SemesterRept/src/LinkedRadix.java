@@ -10,6 +10,7 @@ import java.util.LinkedList;
 public class LinkedRadix {
 
     private LinkedList<Integer> list;
+    private static int iterations = 0;
     private LinkedList<Integer> outList = new LinkedList<Integer>();
 
     public LinkedRadix(LinkedList<Integer> list) {
@@ -27,6 +28,10 @@ public class LinkedRadix {
         return (int)max;
     }
 
+    public static int getIterations() {
+        return iterations;
+    }
+
     void countSort(LinkedList<Integer> list, int exp)
     {
 
@@ -36,8 +41,10 @@ public class LinkedRadix {
         Arrays.fill(count,0);
 
         // Store count of occurrences in count[]
-        for (i = 0; i < list.size(); i++)
-            count[ (list.get(i) /exp)%10 ]++;
+        for (i = 0; i < list.size(); i++) {
+            iterations++;
+            count[(list.get(i) / exp) % 10]++;
+        }
 
         // Change count[i] so that count[i] now contains
         // actual position of this digit in output[]
@@ -50,6 +57,7 @@ public class LinkedRadix {
             output[count[ (list.get(i) /exp)%10 ] - 1] = list.get(i);
             count[ (list.get(i) /exp)%10 ]--;
         }
+
 
 
 
