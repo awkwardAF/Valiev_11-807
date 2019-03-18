@@ -1,10 +1,5 @@
 package numbers;
 
-/* 
-    Code by Azat Valiev
-    Kazan, KFU, ITIS
-*/
-
 
 import java.io.File;
 import java.io.FileWriter;

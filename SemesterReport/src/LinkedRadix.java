@@ -11,7 +11,6 @@ public class LinkedRadix {
 
     private LinkedList<Integer> list;
     private static int iterations = 0;
-    private LinkedList<Integer> outList = new LinkedList<Integer>();
 
     public int getMax() {
         int max = 0;
@@ -44,26 +43,23 @@ public class LinkedRadix {
 
         // Change count[i] so that count[i] now contains
         // actual position of this digit in output[]
-        for (i = 1; i < 10; i++)
+        for (i = 1; i < 10; i++) {
+            iterations++;
             count[i] += count[i - 1];
-
+        }
         // Build the output array
         for (i = list.size() - 1; i >= 0; i--)
         {
+            iterations++;
             output[count[ (list.get(i) /exp)%10 ] - 1] = list.get(i);
             count[ (list.get(i) /exp)%10 ]--;
         }
 
-
-
-
-        // Copy the output array to arr[], so that arr[] now
-        // contains sorted numbers according to current digit
         for (i = 0; i < list.size(); i++)
             list.set(i, output[i]);
     }
 
-    // The main function to that sorts arr[] of size n using
+    // The main function to that sorts List using
     // Radix Sort
     LinkedList<Integer> radixSort(LinkedList<Integer> list)
     {
@@ -78,6 +74,8 @@ public class LinkedRadix {
             countSort(list, exp);
         return list;
     }
+
+    
 
 
 
