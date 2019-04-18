@@ -9,6 +9,10 @@ public class Student implements Comparable<Student> {
         this.name = name;
     }
 
+    public boolean equals (Student student) {
+        return this.id == student.getId() && this.grade == student.getGrade() && this.name == student.getName();
+    }
+
     int getId() {
         return id;
     }
