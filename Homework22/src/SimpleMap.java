@@ -33,6 +33,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
                 return (V) entries[i].value;
             }
         }
+
         return null;
     }
 

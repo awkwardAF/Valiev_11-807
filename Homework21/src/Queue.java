@@ -13,13 +13,20 @@ public class Queue<T> {
         }
     }
 
-    T dequeue() {
-        Node<T> toDequeue = first;
-        first = toDequeue.next;
-        return toDequeue.item;
+    T dequeue(T elem) {
+        if (isEmpty()) {
+            throw new IllegalStateException();
+        } else {
+            elem = first.item;
+            first = first.next;
+            return elem;
+        }
+
+
     }
 
     boolean isEmpty() {
+
         return first == null;
     }
 

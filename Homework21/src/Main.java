@@ -1,20 +1,19 @@
+
 public class Main {
+
     public static void main(String[] args) {
 
-        Stack<Integer> intStack = new Stack<Integer>();
+        PlayList p = new PlayList(3);
 
-        intStack.push(5);
-        intStack.push(6);
-        intStack.push(7);
-        System.out.println(intStack.pop());
-        System.out.println(intStack.pop());
+        AudioTrack a1 = new AudioTrack(123, "fnrjhfn", "jkfnje" );
+        AudioTrack a2 = new AudioTrack(234, "mv", "jvnf");
+        AudioTrack a3 = new AudioTrack( 45, "kj f", "vk lv");
 
-        Queue<Integer> intQueue = new Queue<Integer>();
-        intQueue.enqueue(7);
-        intQueue.enqueue(8);
-        System.out.println(intQueue.dequeue());
-        intQueue.enqueue(9);
-        System.out.println(intQueue.dequeue());
-        System.out.println(intQueue.dequeue());
+
+        p.add(a1);
+        p.add(a2);
+        p.add(a3);
+
+        p.show();
     }
 }

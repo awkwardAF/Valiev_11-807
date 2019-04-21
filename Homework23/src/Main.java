@@ -1,26 +1,34 @@
-public class Main {
+import java.util.Comparator;
 
+public class Main {
     public static void main(String[] args) {
-        // "name", "id", "grade"
-        ByGradeComparator bgc = new ByGradeComparator();
-        ByNameComparator bnc = new ByNameComparator();
-        StudentsSortingRule ssr = new StudentsSortingRule() {
-            @Override
-            public void gradeUp(Student student) {
-                student.setGrade(student.getGrade() + 1);
-            }
-        };
-        SortedStudentGroup ssg = new SortedStudentGroup(4, bnc);
-        Student st2 = new Student(2, 8, "Ваня");
-        Student st3 = new Student(1, 9, "Лёха");
-        Student st1 = new Student(0, 7, "Петя");
-        Student st4 = new Student(3, 11, "Колян");
+        Student st1 = new Student(1, 6, "Georgie");
+        Student st2 = new Student(2, 10, "Ben");
+
+        Comparator<Student> byNameComparator =
+                (o1, o2) -> o1.compareTo(o2);
+
+
+        SortedStudentGroup ssg = new SortedStudentGroup(4, byNameComparator);
         ssg.add(st1);
         ssg.add(st2);
-        ssg.add(st4);
-        ssg.add(st3);
-        ssr.gradeUp(st3);
-        ssg.out();
 
+        Comparator<Student> byGradeComparator =
+                (o1, o2) -> o1.getGrade() - o2.getGrade();
+
+        SortedStudentGroup ssg1 = new SortedStudentGroup(4, byGradeComparator);
+        ssg1.add(st1);
+        ssg1.add(st2);
+
+        Comparator<Student> biIdComparator =
+                (o1, o2) -> o1.getId() - o2.getId();
+
+        SortedStudentGroup ssg2 = new SortedStudentGroup(4, biIdComparator);
+        ssg2.add(st1);
+        ssg2.add(st2);
+
+        ssg.out();
+        ssg1.out();
+        ssg2.out();
     }
 }

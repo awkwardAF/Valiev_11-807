@@ -17,7 +17,7 @@ public class Stack {
 
     public char pop() {
         if (n == 0) {
-            throw new IllegalStateException("Stack is empty");
+            throw new IllegalStateException("Стек пуст");
         }
         return arr[--n];
     }
