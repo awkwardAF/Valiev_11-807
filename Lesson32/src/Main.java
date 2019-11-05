@@ -8,6 +8,6 @@ public class Main {
         bst.insert(15);
         bst.insert(11);
         bst.printAll();
-        System.out.println(bst.contains(12));
+        bst.printAllByLevels();
     }
 }

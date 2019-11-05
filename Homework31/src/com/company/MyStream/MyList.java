@@ -1,13 +1,15 @@
-package MyStream;
+package com.company.MyStream;
 
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.Optional;
-import java.util.Spliterator;
+import java.util.*;
 import java.util.function.*;
 import java.util.stream.*;
 
 public class MyList<T> {
+    private LinkedList<T> list;
+
+    public MyList(LinkedList list) {
+
+    }
 
     public Stream<T> stream() {
         return new MyStream();
@@ -17,12 +19,31 @@ public class MyList<T> {
 
         @Override
         public Stream<T> filter(Predicate<? super T> predicate) {
-            return null;
+            List<T> list = new ArrayList<>();
+            for (T element : list) {
+                if (predicate.test(element)) {
+                    list.add(element);
+                }
+            }
+            return list.stream();
         }
 
         @Override
-        public <R> Stream<R> map(Function<? super T, ? extends R> mapper) {
-            return null;
+        public <R> Stream<R> map(Function<? super T, ? extends R> function) {
+            List<R> list = new ArrayList<>();
+            for (R elem : list) {
+                list.add(function.apply((T)elem));
+            }
+            return list.stream();
+        }
+
+
+        @Override
+        public void forEach(Consumer<? super T> action) {
+            for (T elem : list) {
+                action.accept(elem);
+            }
+
         }
 
         @Override
@@ -88,11 +109,6 @@ public class MyList<T> {
         @Override
         public Stream<T> skip(long n) {
             return null;
-        }
-
-        @Override
-        public void forEach(Consumer<? super T> action) {
-
         }
 
         @Override
@@ -215,5 +231,4 @@ public class MyList<T> {
 
         }
     }
-
 }

@@ -34,8 +34,19 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
     }
 
     @Override
-    public void remove(T t) {
+    public void remove(T elem) {
+        if (contains(elem)) {
+            if (root.value.compareTo(elem) > 0) {
+                root = root.left;
+            } else if (root.value.compareTo(elem) < 0) {
+                root = root.right;
+            } else if (root.value.compareTo(elem) == 0) {
+                root.value = null;
+            }
+            remove(elem);
 
+        }
+        else System.out.println("No such element");
     }
 
     @Override
@@ -69,6 +80,13 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
 
     @Override
     public void printAllByLevels() {
+        if (root == null) {
+            System.out.println("Nothing in the tree");
+        }
+        else {
+            System.out.println(root);
+            
 
+        }
     }
 }
